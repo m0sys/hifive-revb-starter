@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Env
+.ccls
+
+# Platform io
+.pio/
