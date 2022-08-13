@@ -1,8 +1,6 @@
 #include "super_blink.h"
 #include <stdio.h>
 
-void delay(int milliseconds) { return; }
-
 int main()
 {
     int error = 0;
@@ -14,7 +12,7 @@ int main()
     while (!error) {
         set_led(colors[led_num], ON);
         delay(DELAY);
-        error = set_led(colors[led_num], OFF);
+        error = set_led(colors[led_num++], OFF);
         delay(DELAY);
         if (led_num >= NUM_LEDS)
             led_num = 0;

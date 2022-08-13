@@ -2,8 +2,8 @@
 .align 2
 
 .globl set_led
-.include "mem_map.inc"
-.include "gpio.inc"
+.include "asm/inc/mem_map.inc"
+.include "asm/inc/gpio.inc"
 
 .equ NOERR, 0x0
 .equ ERR, 0x1
@@ -38,8 +38,8 @@ led_off:
   sw t1, GPIO_OUTPUT_VAL(t0) # write new output to gpio reg 
   li a0, NOERR
 
-  # Func epilog.
 exit:
+  # Func epilog.
   lw ra, 12(sp) # restore ret addr from stk
   addi sp, sp, 16 # dealloc stk frame
   ret

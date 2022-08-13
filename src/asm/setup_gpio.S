@@ -2,8 +2,8 @@
 .align 2
 
 .globl setup_gpio
-.include "mem_map.inc"
-.include "gpio.inc"
+.include "asm/inc/mem_map.inc"
+.include "asm/inc/gpio.inc"
 
 setup_gpio:
   # Func preamble.
