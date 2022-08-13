@@ -3,8 +3,6 @@
 
 void delay(int milliseconds) { return; }
 
-void setup_gpio() { return; }
-
 int set_led(int color, int state) { return 0; }
 
 int main()
