@@ -26,8 +26,8 @@ set_led:
   j exit
 
 led_on:
-  xor t1 t1, a0 # change only the LED that has been requested
-  sw t1 GPIO_OUTPUT_VAL(t0) # write new output to gpio reg
+  xor t1, t1, a0 # change only the LED that has been requested
+  sw t1, GPIO_OUTPUT_VAL(t0) # write new output to gpio reg
   li a0, NOERR
   sw t1, GPIO_OUTPUT_XOR(t0)
   j exit
