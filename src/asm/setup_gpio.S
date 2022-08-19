@@ -14,7 +14,7 @@ setup_gpio:
   li t1, GPIO_RGB_PINS # load rgb_pins offset
   sw t1, GPIO_OUTPUT_EN(t0) # enable output on the rgb pins so they are writable
   sw t1, GPIO_OUTPUT_XOR(t0) # invert output to active high mode
-  sw x0, GPIO_OUTPUT_VAL(t0) # clear leds to known state 0
+  sw zero, GPIO_OUTPUT_VAL(t0) # clear leds to known state 0
 
   # Func epilog.
   lw ra, 12(sp) # restore ret addr from stk
