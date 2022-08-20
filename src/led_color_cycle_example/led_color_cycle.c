@@ -1,42 +1,7 @@
 #include "led_color_cycle.h"
-#include "common/common.h"
+#include "../common/common.h"
 #include "platform.h"
 #include <stdio.h>
-
-// Do not set this to high, it may damage your eyes or your LED
-
-// Simple variables for LEDs, buttons, etc.
-
-volatile unsigned int* const g_pwm1 = (unsigned int*)PWM1_BASE_ADDR;
-volatile unsigned int* const g_pwm1_s = (unsigned int*)(PWM1_BASE_ADDR + PWM_S);
-volatile unsigned int* const g_pwm1_count = (unsigned int*)(PWM1_BASE_ADDR + PWM_COUNT);
-volatile unsigned int* const g_pwm_cmp0 = (unsigned int*)(PWM1_BASE_ADDR + PWM_CMP0);
-volatile unsigned int* const g_pwm_red = (unsigned int*)(PWM1_BASE_ADDR + PWM_CMP3);
-volatile unsigned int* const g_pwm_green = (unsigned int*)(PWM1_BASE_ADDR + PWM_CMP1);
-volatile unsigned int* const g_pwm_blue = (unsigned int*)(PWM1_BASE_ADDR + PWM_CMP2);
-
-void setup_pwm()
-{
-    // reset counters
-    *g_pwm1_count = 0x00;
-    *g_pwm1_s = 0x00;
-
-    // define cycle length
-    *g_pwm_cmp0 = 0xff;
-
-    *g_pwm1 = PWM_CFG_ENALWAYS | PWM_CFG_ONESHOT
-
-        | PWM_CFG_ZEROCMP
-
-        | PWM_CFG_DEGLITCH;
-}
-
-void pwm_dimm(uint8_t const red, uint8_t const green, uint8_t const blue)
-{
-    *g_pwm_red = red;
-    *g_pwm_green = green;
-    *g_pwm_blue = blue;
-}
 
 int run_led_color_cycle()
 {
@@ -46,8 +11,7 @@ int run_led_color_cycle()
     printf("\n  hello led_color_cycle!\n");
 
     setup_lcc_gpio();
-
-    setup_pwm();
+    setup_lcc_pwm();
 
     while (1) {
         // calculate next color state
@@ -98,9 +62,7 @@ int run_led_color_cycle()
         }
 
         dimm_pwm(red, green, blue);
-        // pwm_dimm(red, green, blue);
-
-        delay(COMMON_DELAY);
+        delay(10);
     }
 
     return 0;

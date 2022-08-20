@@ -3,4 +3,4 @@
 int run_led_color_cycle();
 
 void setup_lcc_gpio();
-// void setup_sb_pwm();
+void setup_lcc_pwm();
