@@ -1,6 +1,6 @@
 .section .text
 .align 2
-.globl setup_pwm
+.globl setup_pwm2
 .include "asm/inc/mem_map.inc"
 .include "asm/inc/pwm.inc"
 
