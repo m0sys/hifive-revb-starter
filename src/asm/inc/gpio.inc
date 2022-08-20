@@ -4,7 +4,7 @@
 .equ GPIO_OUTPUT_VAL_OFFSET,       0x0C
 .equ GPIO_PUE_OFFSET,              0x10
 .equ GPIO_DS_OFFSET,               0x14
-.equ GPIO RISE_IE_OFFSET,          0x18
+.equ GPIO_RISE_IE_OFFSET,          0x18
 .equ GPIO_RISE_IP_OFFSET,          0x1C
 .equ GPIO_FALL_IE_OFFSET,          0x20
 .equ GPIO_FALL_IP_OFFSET,          0x24

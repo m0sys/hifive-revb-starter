@@ -12,5 +12,6 @@
 #define GREEN_LED 0x00080000
 
 void setup_gpio();
+void setup_pwm();
 int set_led(int color, int state);
 void delay(int milliseconds);

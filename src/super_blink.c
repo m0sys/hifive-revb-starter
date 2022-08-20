@@ -8,7 +8,11 @@ int main()
     int colors[NUM_LEDS] = { RED_LED, GREEN_LED, BLUE_LED };
 
     setup_gpio();
+    setup_pwm();
 
+    // set_led(colors[led_num], ON);
+    // set_led(colors[led_num + 1], ON);
+    // set_led(colors[led_num + 2], ON);
     while (!error) {
         set_led(colors[led_num], ON);
         delay(DELAY);
