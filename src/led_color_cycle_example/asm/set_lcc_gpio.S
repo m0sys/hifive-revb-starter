@@ -10,6 +10,7 @@ setup_lcc_gpio:
   addi sp, sp, -16 # alloc stk frame
   sw ra, 12(sp) # save ret addr onto stk
 
+  # Load gpio consts.
   li t0, GPOI_CTRL_ADDR # load base gpio addr
   li t1, GPIO_RGB_PINS # load rgb_pins offset
   not t2, t1 # invert rgb vals

@@ -97,7 +97,8 @@ int run_led_color_cycle()
             state = 0;
         }
 
-        pwm_dimm(red, green, blue);
+        dimm_pwm(red, green, blue);
+        // pwm_dimm(red, green, blue);
 
         delay(COMMON_DELAY);
     }
