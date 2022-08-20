@@ -1,11 +1,11 @@
 .section .text
 .align 2
 
-.globl setup_gpio
-.include "asm/inc/mem_map.inc"
-.include "asm/inc/gpio.inc"
+.globl setup_sb_gpio
+.include "common/asm/inc/mem_map.inc"
+.include "common/asm/inc/gpio.inc"
 
-setup_gpio:
+setup_sb_gpio:
   # Func preamble.
   addi sp, sp, -16 # alloc stk frame
   sw ra, 12(sp) # save ret addr onto stk

@@ -3,7 +3,7 @@
 
 .globl delay
 
-.include "asm/inc/mem_map.inc"
+.include "common/asm/inc/mem_map.inc"
 
 # a0 - delay (milliseconds)
 

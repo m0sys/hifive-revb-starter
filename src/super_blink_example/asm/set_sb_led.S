@@ -1,9 +1,9 @@
 .section .text
 .align 2
 
-.globl set_led
-.include "asm/inc/mem_map.inc"
-.include "asm/inc/gpio.inc"
+.globl set_sb_led
+.include "common/asm/inc/mem_map.inc"
+.include "common/asm/inc/gpio.inc"
 
 .equ NOERR, 0x0
 .equ ERR, 0x1
@@ -11,7 +11,7 @@
 
 # a0 - which LED to set.
 # a1 - what ON/OFF state to set LED.
-set_led:
+set_sb_led:
   # Func preamble.
   addi sp, sp, -16 # alloc stk frame
   sw ra, 12(sp) # save ret addr onto stk

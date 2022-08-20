@@ -1,10 +1,10 @@
 .section .text
 .align 2
-.globl setup_pwm2
-.include "asm/inc/mem_map.inc"
-.include "asm/inc/pwm.inc"
+.globl setup_sb_pwm
+.include "common/asm/inc/mem_map.inc"
+.include "common/asm/inc/pwm.inc"
 
-setup_pwm:
+setup_sb_pwm:
   # Func preamble.
   addi sp, sp, -16 # alloc stk frame
   sw ra, 12(sp) # save ret addr onto stk
