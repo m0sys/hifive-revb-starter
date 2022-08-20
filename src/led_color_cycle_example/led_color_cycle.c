@@ -1,32 +1,11 @@
+#include "led_color_cycle.h"
+#include "common/common.h"
 #include "platform.h"
 #include <stdio.h>
 
 // Do not set this to high, it may damage your eyes or your LED
-uint8_t const LED_MAX_BRIGHTNESS = 0x20;
 
 // Simple variables for LEDs, buttons, etc.
-volatile unsigned int* const g_output_vals = (unsigned int*)(GPIO_BASE_ADDR + GPIO_OUTPUT_VAL);
-volatile unsigned int* const g_input_vals = (unsigned int*)(GPIO_BASE_ADDR + GPIO_INPUT_VAL);
-volatile unsigned int* const g_output_en = (unsigned int*)(GPIO_BASE_ADDR + GPIO_OUTPUT_EN);
-volatile unsigned int* const g_pullup_en = (unsigned int*)(GPIO_BASE_ADDR + GPIO_PULLUP_EN);
-volatile unsigned int* const g_input_en = (unsigned int*)(GPIO_BASE_ADDR + GPIO_INPUT_EN);
-volatile unsigned int* const g_iof_en = (unsigned int*)(GPIO_BASE_ADDR + GPIO_IOF_EN);
-volatile unsigned int* const g_iof_sel = (unsigned int*)(GPIO_BASE_ADDR + GPIO_IOF_SEL);
-volatile unsigned int* const g_out_xor = (unsigned int*)(GPIO_BASE_ADDR + GPIO_OUTPUT_XOR);
-
-// Use only the lower part of the uint64_t mtime register
-volatile uint32_t* mtime = (uint32_t*)(CLINT_BASE_ADDR + CLINT_MTIME);
-
-/**
- * Wait for `duration` times 32.768 kHz.
- * This uses the RTC directly.
- */
-void busy_loop(uint32_t const duration)
-{
-    uint32_t now = *mtime;
-
-    while (*mtime - now < duration) { }
-}
 
 volatile unsigned int* const g_pwm1 = (unsigned int*)PWM1_BASE_ADDR;
 volatile unsigned int* const g_pwm1_s = (unsigned int*)(PWM1_BASE_ADDR + PWM_S);
@@ -66,15 +45,7 @@ int run_led_color_cycle()
 
     printf("\n  hello led_color_cycle!\n");
 
-    // Enable LED output
-    *g_input_en &= ~((0x1 << RED_LED_OFFSET) | (0x1 << GREEN_LED_OFFSET) | (0x1 << BLUE_LED_OFFSET));
-    *g_output_en |= ((0x1 << RED_LED_OFFSET) | (0x1 << GREEN_LED_OFFSET) | (0x1 << BLUE_LED_OFFSET));
-    *g_output_vals |= ((0x1 << RED_LED_OFFSET) | (0x1 << GREEN_LED_OFFSET) | (0x1 << BLUE_LED_OFFSET));
-
-    // Use PWM1 to generate output signal
-    *g_iof_en |= ((0x1 << RED_LED_OFFSET) | (0x1 << GREEN_LED_OFFSET) | (0x1 << BLUE_LED_OFFSET));
-    *g_iof_sel |= IOF1_PWM1_MASK;
-    //*g_out_xor      |= ((0x1<< RED_LED_OFFSET) | (0x1<< GREEN_LED_OFFSET) | (0x1 << BLUE_LED_OFFSET)) ;
+    setup_lcc_gpio();
 
     setup_pwm();
 
@@ -83,14 +54,14 @@ int run_led_color_cycle()
         switch (state) {
         case 0: // r: 00, g: 00, b: 00
             red += 1;
-            if (red == LED_MAX_BRIGHTNESS) {
+            if (red == LCC_LED_MAX_BRIGHTNESS) {
                 state = 1;
             }
             break;
 
         case 1: // r: ff, g: 00, b: 00
             green += 1;
-            if (green == LED_MAX_BRIGHTNESS) {
+            if (green == LCC_LED_MAX_BRIGHTNESS) {
                 state = 2;
             }
             break;
@@ -98,7 +69,7 @@ int run_led_color_cycle()
         case 2: // r: ff, g: ff, b: 00
             red -= 1;
             blue += 1;
-            if (blue == LED_MAX_BRIGHTNESS) {
+            if (blue == LCC_LED_MAX_BRIGHTNESS) {
                 state = 3;
             }
             break;
@@ -106,7 +77,7 @@ int run_led_color_cycle()
         case 3: // r: 00, g: ff, b: ff
             green -= 1;
             red += 1;
-            if (red == LED_MAX_BRIGHTNESS) {
+            if (red == LCC_LED_MAX_BRIGHTNESS) {
                 state = 4;
             }
             break;
@@ -114,7 +85,7 @@ int run_led_color_cycle()
         case 4: // r: ff, g: 00, b: ff
             blue -= 1;
             green += 1;
-            if (green == LED_MAX_BRIGHTNESS) {
+            if (green == LCC_LED_MAX_BRIGHTNESS) {
                 state = 2;
             }
             break;
@@ -128,7 +99,7 @@ int run_led_color_cycle()
 
         pwm_dimm(red, green, blue);
 
-        busy_loop(4200);
+        delay(COMMON_DELAY);
     }
 
     return 0;
