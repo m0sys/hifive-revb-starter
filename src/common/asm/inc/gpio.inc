@@ -1,0 +1,25 @@
+.equ GPIO_INPUT_VAL_OFFSET,        0x00
+.equ GPIO_INPUT_EN_OFFSET,         0x04
+.equ GPIO_OUTPUT_EN_OFFSET,        0x08
+.equ GPIO_OUTPUT_VAL_OFFSET,       0x0C
+.equ GPIO_PUE_OFFSET,              0x10
+.equ GPIO_DS_OFFSET,               0x14
+.equ GPIO_RISE_IE_OFFSET,          0x18
+.equ GPIO_RISE_IP_OFFSET,          0x1C
+.equ GPIO_FALL_IE_OFFSET,          0x20
+.equ GPIO_FALL_IP_OFFSET,          0x24
+.equ GPIO_HIGH_IE_OFFSET,          0x28
+.equ GPIO_HIGH_IP_OFFSET,          0x2C
+.equ GPIO_LOW_IE_OFFSET,           0x30
+.equ GPIO_LOW_IP_OFFSET,           0x34
+.equ GPIO_IOF_EN_OFFSET,           0x38
+.equ GPIO_IOF_SEL_OFFSET,          0x3C
+.equ GPIO_OUTPUT_XOR_OFFSET,       0x40
+.equ GPIO_PASSTHRU_HIGH_IE_OFFSET, 0x44
+.equ GPIO_PASSTHRU_LOW_IE_OFFSET,  0x48
+
+.equ GPIO_RGB_PINS,   0x00680000
+.equ GPIO_RED_LED,    0x00400000
+.equ GPIO_GREEN_LED,  0x00080000
+.equ GPIO_BLUE_LED,   0x00200000
+.equ GPIO_PWM1_MASK,  0x00780000
