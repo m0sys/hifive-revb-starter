@@ -26,4 +26,3 @@ setup_lcc_pwm:
   addi sp, sp, 16 # dealloc stk frame
   ret
 
-

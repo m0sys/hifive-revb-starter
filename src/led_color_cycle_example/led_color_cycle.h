@@ -1,3 +1,4 @@
+// Cycles through colors in an mixed RGB fashion.
 #pragma once
 #define LCC_LED_MAX_BRIGHTNESS 0x20
 int run_led_color_cycle();
