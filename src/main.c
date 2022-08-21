@@ -1,6 +1,6 @@
-#include "dimm_super_blink_example/dimm_super_blink.h"
-#include "led_color_cycle_example/led_color_cycle.h"
-#include "super_blink_example/super_blink.h"
+#include "dimm_super_blink/dimm_super_blink.h"
+#include "led_color_cycle/led_color_cycle.h"
+#include "super_blink/super_blink.h"
 #include <stdio.h>
 
 int main()

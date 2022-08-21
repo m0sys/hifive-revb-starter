@@ -1,6 +1,5 @@
 #include "led_color_cycle.h"
 #include "../common/common.h"
-#include "platform.h"
 #include <stdio.h>
 
 int run_led_color_cycle()
